@@ -1,0 +1,53 @@
+:root{
+  --bg:#0f1724;
+  --card:#ffffff;
+  --accent:#ff7a18;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+.body-wrapper{
+  min-height:100vh;
+}
+body{
+  margin:0;
+  font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;
+  background:linear-gradient(180deg,#071128 0%,var(--bg) 100%);
+  color:#fff;
+  display:flex;
+  /* align to top to avoid centering when content is taller than viewport */
+  align-items:flex-start;
+  justify-content:center;
+  padding:24px 24px 24px 24px;
+  overflow-y:auto;
+}
+.game{width:100%;max-width:760px;margin:0 auto}
+.game-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.game-header h1{margin:0;font-size:1.4rem}
+.counters{display:flex;gap:16px;font-weight:600}
+#restart{background:var(--accent);border:none;padding:8px 12px;border-radius:6px;color:#fff;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.card{
+  perspective:1000px;
+  /* allow transformed children to be visible outside the card bounds */
+  overflow: visible;
+}
+.card-inner{
+  position:relative;
+  width:100%;
+  padding-top:125%;
+  transform-style:preserve-3d;
+  transition:transform .5s;
+  /* hint that transform will change - helps performance */
+  will-change: transform;
+  overflow: visible;
+}
+.card.face-up .card-inner{transform:rotateY(180deg)}
+.card-face{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:8px;-webkit-backface-visibility:hidden;backface-visibility:hidden;font-size:2rem;overflow:visible}
+.card-front{background:#1f2937}
+.card-back{background:var(--card);color:#111;transform:rotateY(180deg)}
+.matched .card-front{background:linear-gradient(90deg,var(--accent),#ffb86b)}
+.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.5)}
+.modal.hidden{display:none}
+.modal-content{background:#0b1220;padding:24px;border-radius:8px;text-align:center}
+#playAgain{margin-top:12px;padding:8px 12px;background:var(--accent);border:none;border-radius:6px;color:#fff;cursor:pointer}
+@media(max-width:520px){.grid{grid-template-columns:repeat(3,1fr)}}
